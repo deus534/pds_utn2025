@@ -1,0 +1,51 @@
+deltaf = resolucion espectral (DF)
+
+tenemos el deltaf = 1 -> es decir que esta normalizada
+reciproco de la resolucion espectral
+
+1/DF = N/Fs=NTs
+
+si tenemos resolucion espectral normalizada entonces tenemos una ventana espectral espectrada.
+
+fs/2 : N > q
+k*DF = fs/2
+fs/(2 * DF) = fs*N/(2*fs) = N/2 ---> k = N/2
+
+------------
+supongamos que tengo una señal x[n] que esta se repite periodicamente hasta N 
+x[n]
+x[n-n0]N desplazamiento circular
+ahora supongamos que tenemos una señal discreta:
+
+X[n]      <----> X(k)
+X[n-n0]N  <----> X(k) exp(-j*k2pi/N * n0)   desplazamiento circular ( Demora Circular )
+X1[n] conv X2[n] <---->  X1(k)*X2(k)        convolucion circular
+X1[n] exp()   <----->   X[k-k0]             Modulacion
+X1[n]X2[n]    <----->   X1[k] conv X2[k] * 1/N  Ventaneo
+X[-n]         <----->   conjugado X[k]      Inversion Temporal
+conjug X[n]   <----->   conjugado X(-k)  o conjug (Trans( conjug(X[n]) ))   Conjugacion compleja
+
+
+Si X es real
+ Conj( Trans( conju( X[n] ) ) ) = Conj( Trans( X[n] ) ) ---> Conju( X[-k] ) ) = Conju( X[k] )
+ |conjg(X[-n]| exp() = |conjg(X[n])| exp()
+
+
+Notacion:
+ X(n)N --> señal circular..
+Convolucion
+Yn = sumatorio( i=0 a N-1 ) ( X1(i)*X2(n-i)N )
+
+
+Ventaneo.- al realizar un ventaneo lo que en realidad pasa a poder analizar la convolucion entre dos señales circulares en frecuencia
+
+existen formas de engañar la convolucion circular, por ejemplo una es que puedes agregar ceros delante y detras de mi señal para que esta se tome como una convolucion lineal, de esta forma la puedo usar de la misma manera que la usamos 
+
+tipos de convolucion en python, full, value
+
+--------++++----------
+resumen de la clase:
+Basicamente lo que hicimos fue probar nuestra funcion seno, y como funciona dependiendo de como lo cambios o como al modificar la frecuencia esta llega a cambiar o mejor dicho si superamos nyquist esta deja de funcionar correctamente y empieza a mostrar otras cosas que no son un seno, claro esto siempre lo relizamos con nuestro "seno" que creamos y que funcionaba correctamente.
+Al final de clase llegamos a ver un poco de las señales discretas X[n] un poco de sus propiedades y como es el funcionamiento de estas asi como cual es su funcionamiento, limitaciones y cuales son ventajas y desventajas. bueno solo llegamos a ver esto.
+
+
