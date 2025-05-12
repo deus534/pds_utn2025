@@ -9,6 +9,13 @@ fs = 1000
 #------------------------------#
 #---MIS FUNCIONES REALIZADAS---#
 #------------------------------#
+def cuantizar(Sr, Vf, B):
+    q = Vf/(2**(B-1))
+    Srq = (Sr*1/q)
+    Sq = np.round(Srq)*q
+    
+    return Sq, q
+    
 def mi_funcion_sen(vmax = 1, dc = 0, ff = 1, ph = 0, nn = N, fs = fs):
     t = nn/fs
     tt = np.arange(0,t,1/fs)
