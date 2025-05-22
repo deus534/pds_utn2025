@@ -6,7 +6,8 @@
 # %% MODULOS + FUNCIONES
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy as sig
+import scipy.signal as sig
+import sympy as sp
 
 from numpy import random
 
@@ -92,8 +93,51 @@ ft_Nqos = np.fft.fft(nq_os)/N_os
 
 nNn_mean_os = np.mean(np.abs(ft_Nnos)**2)
 nNq_mean_os = np.mean(np.abs(ft_Nqos)**2)
-# %%
 
+# %% diseño del filtro 
+
+ftran = 0.1
+ripple = 0.5       #db
+attenuation = 40   #db
+
+fc = 1/over_sampling - ftran/2
+fst = 1/over_sampling + ftran/2
+frecs = [ 0, 0, fc, fst, 1.0 ]
+gains = [ 0, -ripple/2, -attenuation/2, -attenuation/2 ]    #db
+gains = 10**(np.array(gains)/20)
+
+# paso 1.
+orderz, wcutofz = sig.buttord( fc, fst, ripple, attenuation, analog=False)
+
+# paso 2.
+numz, denz = sig.iirfilter(orderz, wcutofz, rp=ripple, rs=attenuation, btype="lowpass", analog=False, ftype="butter")
+
+my_digital_filter = sig.TransferFunction(numz, denz, dt=1/fs)
+my_digital_filter_desc = 'butter' + '_ord_' + str(orderz) + '_digital'
+
+# Plantilla de diseño
+
+plt.figure(1)
+plt.cla()
+
+npoints = 1000
+w_nyq = 2*np.pi*fs/2
+
+w, mag, _ = my_digital_filter.bode(npoints)
+plt.plot(w/w_nyq, mag, label=my_digital_filter_desc)
+
+plt.title('Plantilla de diseño')
+plt.xlabel('Frecuencia normalizada a Nyq [#]')
+plt.ylabel('Amplitud [dB]')
+plt.grid(which='both', axis='both')
+
+plt.gca().set_xlim([0, 1])
+
+#plot_plantilla(filter_type = filter_type , fpass = fpass, ripple = ripple , fstop = fstop, attenuation = attenuation, fs = fs)
+plt.legend()
+
+# %%
+"""
 plt.figure(1, figsize=(12,6))
 plt.title('Señal muestreada por un ADC de {:d} bits - $\pm V_R= $ {:3.1f} V y q = {:3.5f} V'.format(B, Vf, q))
 
@@ -151,3 +195,4 @@ plt.hist( nq )
 
 plt.show()
 plt.tight_layout()
+"""
