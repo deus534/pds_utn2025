@@ -54,6 +54,10 @@ pot_ruido = ((q**2)/12) * kn
 #3. Filtrado paso bajo (frecuencia de corte ≤ 500 Hz)
 #4. Decimación (reducción a 1 kHz)
 #5. FFT para analizar y graficar → eje f = 0 a 500 Hz
+#(segundo pasos a seguir)
+#1. Aplicar con un filtro malo
+#   .) filtro por debajo de la frecuencia de corte
+#   .) filtro por encima de la frecuencia de corte
 
 # %%
 #########################
@@ -141,12 +145,10 @@ plt.show()
 # 2. Ruido
 plt.figure(2, figsize=(12,6))
 plt.title('pisos de ruido')
-plt.plot(ff[bfrec], 10*np.log10(2*np.abs(ft_Srq[bfrec]**2)))
 plt.plot(ff[bfrec], 10*np.log10(2*np.abs(ft_Srqdos[bfrec]**2)))
 plt.plot(ff[bfrec], 10*np.log10(2*np.abs(ft_Srqdosfilt[bfrec]**2)))
 
 plt.legend([
-        '$Srq$',
         '$Srq_{dos}$',
         '$Srq_{dosfilt}$',
     ])
