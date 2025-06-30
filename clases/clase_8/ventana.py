@@ -41,7 +41,7 @@ def mostrar_frecuencia(fft, fftzp):
         ])
     plt.show()
 # %%
-k = 10
+k = 5
 N = 1000
 fs = 1000
 
@@ -96,14 +96,14 @@ fft_hann = np.fft.fft(hann)/N
 fft_hannzp = np.fft.fft(hannzp)/N
 # %% mostrar
 
-mostrar_tiempo(boxcar, boxcarzp)
-mostrar_frecuencia(fft_boxcar, fft_boxcarzp)
+#mostrar_tiempo(boxcar, boxcarzp)
+#mostrar_frecuencia(fft_boxcar, fft_boxcarzp)
 
 #mostrar_tiempo(hamming, hammingzp)
 #mostrar_frecuencia(fft_hamming, fft_hammingzp)
 
-#mostrar_tiempo(blackman, blackmanzp)
-#mostrar_frecuencia(fft_blackman, fft_blackmanzp)
+mostrar_tiempo(blackman, blackmanzp)
+mostrar_frecuencia(fft_blackman, fft_blackmanzp)
 
 #mostrar_tiempo(bohman, bohmanzp)
 #mostrar_frecuencia(fft_bohman, fft_bohmanzp)
