@@ -4,18 +4,16 @@ import scipy.io as sio
 
 from scipy import signal as sig
 
-
-
 fs_ecg = 1000
 win = 'hamming'
-archive_wav = 'la cucaracha.wav'
+#archive_wav = 'la cucaracha.wav'
 #archive_wav = 'prueba psd.wav'
-#archive_wav = 'silbido.wav'
+archive_wav = 'silbido.wav'
 
 archive_mat = 'ECG_TP4.mat'
 
-#archive_npy = 'ecg_sin_ruido.npy'
-archive_npy = 'ppg_sin_ruido.npy'
+archive_npy = 'ecg_sin_ruido.npy'
+#archive_npy = 'ppg_sin_ruido.npy'
 
 #++++++++++++++++++++++++++++++++++#
 #CARGADO DE DATOS#
@@ -206,7 +204,8 @@ def graficar(ff1, ff2, pw1, pw2, db1, db2, archive):
     plt.savefig(f'{name}_fft.png')
     plt.show()
 
-#graficar(ff_wav_per, ff_wav_wel, pw_wav_per, pw_wav_wel, db_wav_per, db_wav_wel, archive_wav)
-graficar(ff_npy_per, ff_npy_wel, pw_npy_per, pw_npy_wel, db_npy_per, db_npy_wel, archive_npy)
+
+graficar(ff_wav_per, ff_wav_wel, pw_wav_per, pw_wav_wel, db_wav_per, db_wav_wel, archive_wav)
+#graficar(ff_npy_per, ff_npy_wel, pw_npy_per, pw_npy_wel, db_npy_per, db_npy_wel, archive_npy)
 #graficar(ff_patter1_per, ff_patter1_wel, pw_patter1_per, pw_patter1_wel, db_patter1_per, db_patter1_wel, archive_mat)
 
